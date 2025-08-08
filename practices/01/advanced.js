@@ -160,7 +160,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     // 이벤트 리스너 등록
-    articleList.addEventListener('transitionend', onTransitionEnd);
     articleList.addEventListener('mousedown', dragStart);
     articleList.addEventListener('mousemove', dragMove);
     articleList.addEventListener('mouseup', dragEnd);
@@ -168,6 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
     articleList.addEventListener('touchstart', dragStart, { passive: false });
     articleList.addEventListener('touchmove', dragMove);
     articleList.addEventListener('touchend', dragEnd);
+    articleList.addEventListener('transitionend', onTransitionEnd);
 
     // 아티클 카드에 클릭 이벤트 추가
     const articleCardLinks = document.querySelectorAll('.article-card > a');
