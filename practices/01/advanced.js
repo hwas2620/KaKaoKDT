@@ -181,7 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        const clickedCard = this.closest('.article-card.large');
+        const clickedCard = this.closest('.article-card');
 
         if (clickedCard.classList.contains('pos-left')) {
             event.preventDefault();
@@ -189,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (clickedCard.classList.contains('pos-right')) {
             event.preventDefault();
             showNextCard();
-        } else if (clickedCard.classList.contains('pos-center')) {
+        } else {
             event.preventDefault();
             
             contentArticles.forEach(article => {
@@ -223,7 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
     articleList.addEventListener('touchend', dragEnd);
     articleList.addEventListener('transitionend', onTransitionEnd);
 
-    const articleCards = articleList.querySelectorAll('.article-card.large .article-card-wrapper');
+    const articleCards = document.querySelectorAll('.article-card .article-card-wrapper');
 
     articleCards.forEach(link => {
         link.addEventListener('click', clickCard);
