@@ -1,6 +1,9 @@
-* {
+*,
+*::before,
+*::after {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 html {
@@ -17,7 +20,8 @@ body > header {
     flex-direction: column;
     align-items: left;
     width: 100%;
-    height: 0px;
+    height: auto;
+    padding: 20px;
     color: #fff;
 }
 
@@ -25,19 +29,42 @@ body > header h1 {
     padding: 20px;
 }
 
-main {
+body > header, body > main, body > footer {
+    max-width: 1200px;
+    margin: 0 auto;
+    
     width: 100%;
     height: 100%;
-    padding: 0;
-    margin: 0;
 }
 
-.article-list {
+/*** initials-icon ***/
+.initials-icon {
+  display: inline-flex; /* 1. 아이콘을 글자처럼 취급하고, 내부 정렬을 위해 flex 사용 */
+  align-items: center;    /* 2. 내부 글자를 세로 중앙으로 정렬 */
+  justify-content: center;/* 3. 내부 글자를 가로 중앙으로 정렬 */
+  
+  width: 32px;            /* 4. 아이콘의 너비 */
+  height: 32px;           /* 5. 아이콘의 높이 */
+  border-radius: 50%;     /* 6. 원 모양으로 만들기 */
+  
+  background-color: #6a7885; /* 7. 배경색 (원하시는 색으로 변경 가능) */
+  color: #ffffff;             /* 8. 글자색 */
+  
+  font-size: 14px;        /* 9. 글자 크기 */
+  font-weight: bold;      /* 10. 글자를 굵게 */
+  
+  margin-right: 8px;      /* 11. 아이콘과 이름 사이의 간격 */
+  vertical-align: middle; /* 12. 주변 텍스트와의 세로 정렬을 매끄럽게 함 */
+}
+
+/*** carousel-container ***/
+
+.carousel-container {
     overflow: hidden;
-    padding: 100px 20px 20px 20px;
+    padding: 20px;
 }
 
-.article-list ul {
+.carousel-container-wrapper {
     position: relative;
     width: 100%;
     height: 70vh;
@@ -48,91 +75,83 @@ main {
     user-select: none;
 }
 
-.article-list ul.grabbing {
+.carousel-container-wrapper.grabbing {
     cursor: grabbing;
 }
 
-.article-list li {
+.article-card {
     margin: 0;
     padding: 0;
+    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
 }
 
-.article-list a, .article-content a {
-    text-decoration: none;
-    color: inherit;
-}
-.article-list a {
-    display: block;
+.article-card-wrapper {
+    display: flex;
     width: 100%;
     height: 100%;
+
     text-decoration: none;
     color: inherit;
-    transition: transform 0.3s ease;
 }
 
-.article-card {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
+.article-img-container img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.large {
     width: 300px;
     height: 400px;
     opacity: 0;
 }
 
-/* 1. 중앙 자리 */
-.pos-center {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 1;
-    z-index: 10;
-}
-
-/* 2. 왼쪽 자리 */
-.pos-left {
-    transform: translate(-160%, -50%) scale(0.85);
-    opacity: 0.7;
-    z-index: 5;
-}
-
-/* 3. 오른쪽 자리 */
-.pos-right {
-    transform: translate(60%, -50%) scale(0.85);
-    opacity: 0.7;
-    z-index: 5;
-}
-
-/* 4. 왼쪽 밖 */
-.pos-left-extra {
-    transform: translate(-250%, -50%) scale(0.7);
-    opacity: 0;
-    z-index: 1;
-}
-
-/* 5. 오른쪽 밖 */
-.pos-right-extra {
-    transform: translate(150%, -50%) scale(0.7);
-    opacity: 0;
-    z-index: 1;
-}
-
-.article-card .article-img-container {
-    position: relative;
-    width: 100%;
-    height: 80%;
-    margin: 0;
-}
-
-.article-card .article-img-container img {
-    position: absolute;
-    margin-bottom: 15px;
+.medium {
     width: 100%;
     height: 100%;
-    border-radius: 10px;
+    opacity: 0;
 }
 
-.article-card .article-img-container h2 {
+.small {
+    width: 300px;
+    height: 200px;
+    opacity: 0;
+}
+
+.article-card.large {
+    position: absolute;
+    display: flex;
+
+    top: 50%;
+    left: 50%;
+}
+
+.article-img-container, .article-title-container {
+    min-width: 0;
+    min-height: 0;
+}
+
+.article-card.large .article-card-wrapper {
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.article-card.large .article-img-container {
+    flex: 8;
+}
+
+.article-card.large .article-title-container {
+    flex: 2;
+}
+
+.article-card.large .article-title-container .tag {
     position: absolute;
     font-size: 0.3em;
+    top: 0;
+    left: 0;
+    z-index: 20;
     margin: 10px;
     padding: 10px;
     border-radius: 10px;
@@ -141,27 +160,135 @@ main {
     background-color: #a1a0a053;
 }
 
-.article-card .article-title-container {
-    position: relative;
-    width: 100%;
-    height: 20%;
-}
-
-.article-card .article-title-container h2 {
+.article-card.large .article-title-container h2 {
     position: relative;
     font-size: 1.2em;
     margin: 5px;
     color: #FFFFFF;
 }
 
-.article-card .article-title-container h3 {
+.article-card.large .article-title-container p {
     position: relative;
     font-size: 0.7em;
     margin: 5px;
     color: #AAAAAA;
 }
 
-.article-content article {
+.grid-container {
+    margin: 20px;
+}
+
+.grid-container .grid-title {
+    color: #FFFFFF;
+    font-size: 1.6em;
+    margin: 20px;
+}
+.grid-container .grid-container-wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px; /* 카드 사이 간격 */
+
+    /* 캐러셀에 필요했던 속성들을 그리드에 맞게 초기화 */
+    height: auto;
+    cursor: default;
+}
+
+
+.article-card.medium {
+    /* 기존 CSS의 opacity: 0을 덮어쓰기 위해 1로 설정합니다. */
+    opacity: 1;
+}
+
+.article-card.medium .article-card-wrapper {
+    display: flex;
+    align-items: center; /* 세로 중앙 정렬 */
+    padding: 16px;       /* 카드 내부 여백 */
+    gap: 16px;           /* 텍스트와 이미지 사이의 간격 */
+    text-decoration: none;
+    color: inherit;
+    width: 100%;
+    height: 100%;
+    background-color: #1e1e1e; /* 이미지와 비슷한 어두운 배경색 */
+    border-radius: 10px;
+}
+
+.article-card.medium .article-title-container {
+    order: 1; /* (핵심) 시각적 순서를 첫 번째로 변경 */
+    flex: 1;  /* 남는 공간을 모두 차지하도록 설정 */
+}
+
+.article-card.medium .article-img-container {
+    order: 2; /* (핵심) 시각적 순서를 두 번째로 변경 */
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0; /* 공간이 부족해도 줄어들지 않도록 고정 */
+}
+
+.article-card.medium .article-img-container img {
+    border-radius: 8px; /* 이미지 모서리를 둥글게 */
+}
+
+.article-card.medium .tag {
+    display: none;
+}
+
+/* 제목 스타일 */
+.article-card.medium .title {
+    color: #ffffff;
+    font-size: 1rem; /* 16px */
+    margin: 0 0 4px 0;
+}
+
+/* 부제목('요약' 클래스) 스타일 */
+.article-card.medium .summary {
+    color: #aaaaaa;
+    font-size: 0.875rem; /* 14px */
+    margin: 0;
+}
+
+/* 작성자('작가명' 클래스) 스타일 */
+.article-card.medium .author {
+    color: #e0e0e0;
+    font-size: 0.8rem; /* 13px */
+    margin-top: 16px; /* 위쪽 텍스트 블록과의 간격 */
+}
+
+/*** 위치 표시자 ***/
+
+.article-card.pos-center {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+    z-index: 10;
+}
+
+.article-card.pos-left {
+    transform: translate(-160%, -50%) scale(0.85);
+    opacity: 0.7;
+    z-index: 5;
+}
+
+.article-card.pos-right {
+    transform: translate(60%, -50%) scale(0.85);
+    opacity: 0.7;
+    z-index: 5;
+}
+
+.article-card.pos-left-extra {
+    transform: translate(-250%, -50%) scale(0.7);
+}
+
+.article-card.pos-right-extra {
+    transform: translate(150%, -50%) scale(0.7);
+}
+
+.article-card.is-out {
+    opacity: 0;
+    z-index: 1;
+}
+
+/*** article-container ***/
+
+.article-container article {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -177,32 +304,35 @@ main {
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 
     opacity: 0;
-    transform: translate(-50%, 150%) scale(0.9);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translate(-50%, 100vh);
     visibility: hidden;
+
+    transition: opacity 0.4s ease, transform 0.4s ease, visibility 0s 0.4s;
 }
 
-.article-content article.visible {
+.article-container article.visible {
     opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
+    transform: translate(-50%, -50%);
     visibility: visible;
+
+    transition-delay: 0s;
 }
 
-.article-content article header {
+.article-container article header {
     position: relative;
     width: 100%;
     margin-bottom: 20px;
     text-align: center;
 }
 
-.article-content article header h2 {
+.article-container article header h2 {
     margin: 0;
     color: #fff;
     font-size: 1.4em;
     padding: 0 40px;
 }
 
-.article-content article header .close-bt {
+.article-container article header .close-bt {
     position: absolute;
     top: 50%;
     right: 10px;
@@ -219,11 +349,11 @@ main {
     transition: color 0.2s ease;
 }
 
-.article-content article header .close-bt:hover {
+.article-container article header .close-bt:hover {
     color: #fff;
 }
 
-.article-content article p {
+.article-container article p {
     position: relative;
     font-size: 1em;
     text-align: center;
@@ -231,7 +361,7 @@ main {
     color: #fff;
 }
 
-.article-content article .article-content-main-container {
+.article-container article main {
     display: flex;
     flex-direction: row;
     align-items: top;
@@ -241,7 +371,7 @@ main {
     gap: 20px;
 }
 
-.article-content article .article-content-main-container img {
+.article-container article main img {
     position: relative;
     max-width: calc(50% - 20px);
     width: 100%;
@@ -251,7 +381,7 @@ main {
     margin-bottom: 20px;
 }
 
-.article-content article .article-content-main-container .article-content-text {
+.article-container article main .contents {
     position: relative;
     max-width: calc(50% - 20px);
     width: 100%;
@@ -260,6 +390,8 @@ main {
     line-height: 1.5;
     margin-bottom: 20px;
 }
+
+/*** navi ***/
 
 .navi {
     position: fixed;
@@ -307,35 +439,36 @@ main {
     margin-bottom: 4px;
 }
 
-footer {
+/*** footer ***/
+
+body > footer {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 90%;
-    height: 60px;
     color: #fff;
-    padding: 30px 20px;
-    margin: auto;
+    padding: 20px;
+    margin: 0px 40px;
     border-radius: 20px;
     border-top: 1px solid #222;
     border-bottom: 1px solid #222;
     background-color: #0C0C0C;
 }
 
-footer small {
+body > footer small {
     /* 폰트 색상을 부드럽게 하고, 줄 간격을 넓혀 가독성을 높입니다. */
     color: #888;
     font-size: 0.9em;
     line-height: 1.7; /* 줄 간격을 1.7배로 설정 */
 }
 
-footer ul li {
+body > footer ul li {
     padding: 5px;
     list-style-type: circle;
 }
 
-footer a {
+body > footer a {
     /* 링크 색상을 조금 더 밝게 하고, 밑줄을 없앱니다. */
     color: #bbb;
     text-decoration: none;
@@ -343,7 +476,7 @@ footer a {
     transition: color 0.3s ease; /* 색상 변경 시 부드러운 효과 */
 }
 
-footer a:hover {
+body > footer a:hover {
     /* 마우스를 올렸을 때 링크 색상을 밝게 변경합니다. */
     color: #fff;
 }

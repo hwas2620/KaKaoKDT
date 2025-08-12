@@ -1,38 +1,49 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const articleList = document.querySelector('.article-list ul');
-    const allCards = document.querySelectorAll('.article-card');
+    const articleList = document.querySelector('.carousel-container-wrapper');
+    const allCards = articleList.querySelectorAll('.article-card.large');
     let virtualCards = Array.from(allCards);
 
     const maxCards = 3;
     
     let isAnimating = false;
     let autoSlideInterval;
-    const autoSlideTime = 4000;
+    const autoSlideTime = 3000;
 
     let isDragging = false;
     let dragDir = 0;
     let startX = 0;
     const clickThreshold = 5;
 
-    function updateCarousel() {
+    function updateCarousel(skipTransition = false) {
         virtualCards.forEach((card, index) => {
+            if (skipTransition) {
+                card.style.transition = 'none';
+            }
+
             switch(index) {
                 case 0:
-                    card.className = 'article-card pos-left';
+                    card.className = 'article-card large pos-left';
                     break;
                 case 1:
-                    card.className = 'article-card pos-center';
+                    card.className = 'article-card large pos-center';
                     break;
                 case 2:
-                    card.className = 'article-card pos-right';
+                    card.className = 'article-card large pos-right';
                     break;
                 default:
+                    card.classList.add('is-out');
                     break;
+            }
+
+            if (skipTransition) {
+                requestAnimationFrame(() => {
+                    card.style.transition = '';
+                });
             }
         });
     }
 
-    // 왼쪽으로 드래그
+    // 왼쪽으로 슬라이드
     function showNextCard() {
         if (isAnimating) return;
         isAnimating = true;
@@ -41,34 +52,34 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!rightCard) { isAnimating = false; return; }
 
         rightCard.style.transition = 'none';
-        rightCard.className = 'article-card pos-right-extra';
+        rightCard.className = 'article-card large pos-right-extra is-out';
 
         requestAnimationFrame(() => {
             requestAnimationFrame(() => {
                 rightCard.style.transition = '';
                 const leftCard = virtualCards.shift();
-                leftCard.className = 'article-card pos-left-extra';
+                leftCard.className = 'article-card large pos-left-extra is-out';
                 virtualCards.push(leftCard);
                 updateCarousel();
             });
         });
     }
 
-    // 오른쪽으로 드래그
+    // 오른쪽으로 슬라이드
     function showPrevCard() {
         if (isAnimating) return;
         isAnimating = true;
         
         const lastCard = virtualCards.pop();
         lastCard.style.transition = 'none';
-        lastCard.className = 'article-card pos-left-extra';
+        lastCard.className = 'article-card large pos-left-extra is-out';
         virtualCards.unshift(lastCard);
 
         requestAnimationFrame(() => {
             requestAnimationFrame(() => {
                 lastCard.style.transition = '';
                 const rightCard = virtualCards[maxCards];
-                rightCard.className = 'article-card pos-right-extra';
+                rightCard.className = 'article-card large pos-right-extra is-out';
                 updateCarousel();
             });
         });
@@ -80,6 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // 자동 슬라이드
     function startAutoSlide() {
         stopAutoSlide();
         autoSlideInterval = setInterval(showNextCard, autoSlideTime);
@@ -111,20 +123,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const moveX = Math.max(-20, Math.min(20, dragOffset / 5));
 
         virtualCards.forEach((card, index) => {
-            const a = card.querySelector('a');
+            const articleCardWrapper = card.querySelector('.article-card-wrapper');
 
             switch(index) {
                 case 0:
-                    a.style.transition = 'none';
-                    a.style.transform = `translateX(${moveX}px)`;
+                    articleCardWrapper.style.transition = 'none';
+                    articleCardWrapper.style.transform = `translateX(${moveX}px)`;
                     break;
                 case 1:
-                    a.style.transition = 'none';
-                    a.style.transform = `translateX(${moveX}px) scale(${(1000 - Math.abs(moveX)) / 1000})`;
+                    articleCardWrapper.style.transition = 'none';
+                    articleCardWrapper.style.transform = `translateX(${moveX}px) scale(${(1000 - Math.abs(moveX)) / 1000})`;
                     break;
                 case 2:
-                    a.style.transition = 'none';
-                    a.style.transform = `translateX(${moveX}px)`;
+                    articleCardWrapper.style.transition = 'none';
+                    articleCardWrapper.style.transform = `translateX(${moveX}px)`;
                     break;
                 default:
                     break;
@@ -145,10 +157,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         
         virtualCards.forEach((card, index) => {
-            const a = card.querySelector('a');
+            const articleCardWrapper = card.querySelector('.article-card-wrapper');
 
-            a.style.transition = 'transform 0.5s ease';
-            a.style.transform = '';
+            articleCardWrapper.style.transition = 'transform 0.5s ease';
+            articleCardWrapper.style.transform = '';
         });
 
         if (dragDir < 0) {
@@ -157,6 +169,48 @@ document.addEventListener('DOMContentLoaded', () => {
             showPrevCard();
         }
         startAutoSlide();
+    }
+
+    // 아티클 카드에 클릭 이벤트 추가
+    const contentArticles = document.querySelectorAll('.article-container article');
+
+    function clickCard(event) {
+        if (dragDir !== 0) {
+            event.preventDefault();
+            event.stopPropagation();
+            return;
+        }
+
+        const clickedCard = this.closest('.article-card');
+
+        if (clickedCard.classList.contains('pos-left')) {
+            event.preventDefault();
+            showPrevCard();
+        } else if (clickedCard.classList.contains('pos-right')) {
+            event.preventDefault();
+            showNextCard();
+        } else {
+            event.preventDefault();
+            
+            contentArticles.forEach(article => {
+                article.classList.remove('visible');
+            });
+
+            const targetId = this.getAttribute('href');
+            const targetArticle = document.querySelector(targetId);
+
+            if (targetArticle) {
+                targetArticle.classList.add('visible');
+            }
+        }
+    }
+
+    function clickCloseButton(event) {
+        resetAutoSlide();
+
+        const articleContent = this.closest('article');
+
+        articleContent.classList.remove("visible");
     }
     
     // 이벤트 리스너 등록
@@ -169,56 +223,19 @@ document.addEventListener('DOMContentLoaded', () => {
     articleList.addEventListener('touchend', dragEnd);
     articleList.addEventListener('transitionend', onTransitionEnd);
 
-    // 아티클 카드에 클릭 이벤트 추가
-    const articleCardLinks = document.querySelectorAll('.article-card > a');
-    const contentArticles = document.querySelectorAll('.article-content > article');
+    const articleCards = document.querySelectorAll('.article-card .article-card-wrapper');
 
-    articleCardLinks.forEach(link => {
-        link.addEventListener('click', (event) => {
-            if (dragDir !== 0) {
-                event.preventDefault();
-                event.stopPropagation();
-                return;
-            }
-
-            const clickedCard = link.closest('.article-card');
-
-            if (clickedCard.classList.contains('pos-left')) {
-                event.preventDefault();
-                showPrevCard();
-            } else if (clickedCard.classList.contains('pos-right')) {
-                event.preventDefault();
-                showNextCard();
-            } else if (clickedCard.classList.contains('pos-center')) {
-                event.preventDefault();
-                
-                contentArticles.forEach(article => {
-                    article.classList.remove('visible');
-                });
-
-                const targetId = link.getAttribute('href');
-                const targetArticle = document.querySelector(targetId);
-
-                if (targetArticle) {
-                    targetArticle.classList.add('visible');
-                }
-            }
-        });
+    articleCards.forEach(link => {
+        link.addEventListener('click', clickCard);
     });
 
-    const articleContentCloseButtons = document.querySelectorAll('.article-content .close-bt');
+    const articleContentCloseButtons = document.querySelectorAll('.article-container .close-bt');
 
     articleContentCloseButtons.forEach(button => {
-        button.addEventListener('click', (event) => {
-            resetAutoSlide();
-
-            const articleContent = button.closest('article');
-
-            articleContent.classList.remove("visible");
-        });
+        button.addEventListener('click', clickCloseButton);
     });
 
     // 초기 상태 설정
-    updateCarousel();
+    updateCarousel(skipTransition=true);
     startAutoSlide();
 });
