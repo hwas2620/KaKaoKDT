@@ -67,7 +67,7 @@
     flex: 2;
 }
 
-.article-card.large .article-title-container .tag {
+.article-card.large .article-title-container .category {
     position: absolute;
     font-size: 0.3em;
     top: 0;
@@ -88,7 +88,8 @@
     color: #FFFFFF;
 }
 
-.article-card.large .article-title-container .excerpt {
+.article-card.large .article-title-container .excerpt,
+.article-card.large .article-title-container .author {
     position: relative;
     font-size: 0.7em;
     margin: 5px;
@@ -125,7 +126,7 @@
     flex-shrink: 0;
 }
 
-.article-card.medium .tag {
+.article-card.medium .category {
     display: none;
 }
 
