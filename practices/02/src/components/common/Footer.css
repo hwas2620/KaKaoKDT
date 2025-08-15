@@ -1,0 +1,38 @@
+footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    padding: 20px;
+    margin: 0px 40px;
+    border-radius: 20px;
+    border-top: 1px solid #222;
+    border-bottom: 1px solid #222;
+    background-color: #0C0C0C;
+}
+
+footer small {
+    /* 폰트 색상을 부드럽게 하고, 줄 간격을 넓혀 가독성을 높입니다. */
+    color: #888;
+    font-size: 0.9em;
+    line-height: 1.7; /* 줄 간격을 1.7배로 설정 */
+}
+
+footer ul li {
+    padding: 5px;
+    list-style-type: circle;
+}
+
+footer a {
+    /* 링크 색상을 조금 더 밝게 하고, 밑줄을 없앱니다. */
+    color: #bbb;
+    text-decoration: none;
+    font-weight: 600; /* 살짝 굵게 */
+    transition: color 0.3s ease; /* 색상 변경 시 부드러운 효과 */
+}
+
+footer a:hover {
+    /* 마우스를 올렸을 때 링크 색상을 밝게 변경합니다. */
+    color: #fff;
+}
