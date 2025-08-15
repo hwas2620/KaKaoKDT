@@ -1,0 +1,106 @@
+[
+  {
+    "id": 1,
+    "title": "Morbi fringilla in ipsum vitae egestas",
+    "category": "Nam massa nisl",
+    "thumbnail": "/imgs/jonas-degener-zdWnuuVdTtw-unsplash.jpg",
+    "thumbnailAlt": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "author": {
+      "name": "Quisque lectus"
+    },
+    "content": "Nam massa nisl, mattis sed accumsan non, ullamcorper nec mi. Morbi fringilla in ipsum vitae egestas. Nullam faucibus vehicula nunc ut fermentum. Proin vestibulum auctor sem sed aliquam. Quisque lectus sem, sodales sed varius a, pretium sed dui. Donec nec odio vestibulum, hendrerit ante et, ornare tellus. Aenean posuere nunc a augue faucibus maximus. Duis aliquam diam ac mauris efficitur, hendrerit commodo dui convallis. Nam in sapien varius, tempus ante ac, eleifend tellus. Nam nibh ex, mattis at nulla sed, viverra tincidunt nulla. Nunc elementum diam quis magna tincidunt ultricies. Vestibulum aliquam dolor enim, nec vehicula arcu tincidunt mollis. Pellentesque vel justo luctus, tristique erat id, ultrices odio. Suspendisse tempor porta dapibus. Proin blandit tortor et gravida fermentum. Sed odio mauris, facilisis ultricies interdum sit amet, sodales at diam.",
+    "createdAt": "2025-08-13T22:30:00.000Z",
+    "viewCount": 4821
+  },
+  {
+    "id": 2,
+    "title": "Fusce dui est, lobortis sit amet tortor vel",
+    "category": "Pellentesque",
+    "thumbnail": "/imgs/kelly-sikkema-B-BnU5D6C0k-unsplash.jpg",
+    "thumbnailAlt": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "author": {
+      "name": "sodales finibus"
+    },
+    "content": "Pellentesque nec purus est. Fusce dui est, lobortis sit amet tortor vel, sodales finibus libero. Aenean sollicitudin nisi vitae lobortis facilisis. Vestibulum aliquam vestibulum justo, a vulputate quam porta fermentum. Donec nec vehicula massa, ut cursus leo. In viverra vel velit non cursus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam massa mauris, porttitor quis suscipit vitae, posuere euismod nibh. Sed sit amet dui ut metus aliquet rhoncus. Maecenas feugiat sed diam ac faucibus. Integer hendrerit elementum hendrerit. Proin ac vestibulum nisl, nec rutrum dui.",
+    "createdAt": "2025-08-12T18:45:00.000Z",
+    "viewCount": 1234
+  },
+  {
+    "id": 3,
+    "title": "Consectetur et turpis sit amet dictum",
+    "category": "Mauris",
+    "thumbnail": "/imgs/linus-belanger-5vnqUmoTIVA-unsplash.jpg",
+    "thumbnailAlt": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+    "author": {
+      "name": "Duis molestie"
+    },
+    "content": "Mauris consectetur et turpis sit amet dictum. Integer pretium tincidunt suscipit. Nulla id arcu in nulla consequat aliquam nec quis nisi. Sed congue nunc ut aliquam rutrum. Duis molestie, ligula quis consectetur consequat, metus urna vehicula sapien, sit amet egestas ipsum ex vitae ligula. Sed vel quam maximus, ullamcorper orci porta, tristique mi. Aenean tincidunt elit eu elit gravida, ut molestie tellus tincidunt. Donec tempor facilisis dolor, in venenatis dolor maximus et. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas mi justo, efficitur vel ornare quis, lacinia congue ante.",
+    "createdAt": "2025-08-12T11:20:00.000Z",
+    "viewCount": 2890
+  },
+  {
+    "id": 4,
+    "title": "Vivamus quis urna et arcu suscipit condimentum",
+    "category": "congue lectus",
+    "thumbnail": "/imgs/pavlo-talpa-QCuAksDCuC8-unsplash.jpg",
+    "thumbnailAlt": "Nisi ut aliquip ex ea commodo consequat.",
+    "author": {
+      "name": "Quisque quam"
+    },
+    "content": "Sed a congue lectus. Vivamus quis urna et arcu suscipit condimentum. Sed tincidunt malesuada magna sed euismod. Donec dui dolor, condimentum vel varius id, malesuada id est. Quisque quam libero, volutpat nec maximus vitae, varius vitae ipsum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc accumsan sapien metus, in posuere mi dignissim porttitor. Aliquam nisl nibh, accumsan nec efficitur varius, hendrerit elementum est. Curabitur feugiat enim feugiat rhoncus lobortis.",
+    "createdAt": "2025-08-11T23:55:00.000Z",
+    "viewCount": 870
+  },
+  {
+    "id": 5,
+    "title": "Nulla facilisi cras fermentum odio eu",
+    "category": "Praesent",
+    "thumbnail": "/imgs/brano-Mm1VIPqd0OA-unsplash.jpg",
+    "thumbnailAlt": "Duis aute irure dolor in reprehenderit in voluptate velit esse.",
+    "author": {
+      "name": "Aurelius Maximus"
+    },
+    "content": "Nulla sit amet mi id velit porta luctus semper ut sem. Proin ac porta justo, sollicitudin vehicula lectus. Cras molestie mi mauris, eget condimentum massa blandit quis. Integer at viverra tellus. Vivamus sagittis enim vel dignissim iaculis. Donec a neque imperdiet lectus tempus iaculis. Praesent ut sem volutpat, pulvinar lectus ac, commodo lacus. Vestibulum ultrices sapien et ex finibus imperdiet nec cursus turpis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse dolor eros, auctor vel lacinia id, finibus nec libero.",
+    "createdAt": "2025-08-10T09:15:00.000Z",
+    "viewCount": 9980
+  },
+  {
+    "id": 6,
+    "title": "Vestibulum ante ipsum primis in faucibus",
+    "category": "Curabitur",
+    "thumbnail": "/imgs/damiano-baschiera-d4feocYfzAM-unsplash.jpg",
+    "thumbnailAlt": "Cillum dolore eu fugiat nulla pariatur.",
+    "author": {
+      "name": "Livia Drusilla"
+    },
+    "content": "Aenean convallis egestas mauris, vulputate condimentum mauris sodales nec. Quisque congue enim nec purus tincidunt tempus. Integer lectus dui, fermentum sed libero vitae, congue efficitur ante. Sed cursus orci et nibh condimentum, ac vehicula ipsum interdum. Sed volutpat nisl et sapien porta dignissim. Aenean in turpis non lectus euismod tincidunt dignissim fermentum est. Vestibulum feugiat faucibus nisi, sed tristique augue fermentum quis. Donec quis magna ante.",
+    "createdAt": "2025-08-09T14:30:00.000Z",
+    "viewCount": 3520
+  },
+  {
+    "id": 7,
+    "title": "Donec et odio pellentesque diam volutpat",
+    "category": "Aenean",
+    "thumbnail": "/imgs/nasa-_SFJhRPzJHs-unsplash.jpg",
+    "thumbnailAlt": "Excepteur sint occaecat cupidatat non proident, sunt in culpa.",
+    "author": {
+      "name": "Cassius Longinus"
+    },
+    "content": "Duis elementum eu risus eget volutpat. Curabitur lacinia, nibh eget elementum pretium, mauris sem volutpat odio, in maximus tellus metus eu est. Integer commodo, ex ut consectetur finibus, quam mauris dictum justo, non finibus est dui ut elit. Morbi dapibus ac magna at porta. Vivamus suscipit vehicula lorem, rhoncus tristique nulla consectetur vel. Integer faucibus urna ut enim placerat, a blandit urna molestie. Suspendisse potenti. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+    "createdAt": "2025-08-08T17:05:00.000Z",
+    "viewCount": 15032
+  },
+  {
+    "id": 8,
+    "title": "Integer quis auctor elit sed vulputate",
+    "category": "Vivamus",
+    "thumbnail": "/imgs/markus-spiske--dbOrdtrR1A-unsplash.jpg",
+    "thumbnailAlt": "Qui officia deserunt mollit anim id est laborum.",
+    "author": {
+      "name": "Flavia Julia"
+    },
+    "content": "Cras ac facilisis arcu, ut semper diam. Duis semper, lorem quis finibus suscipit, lectus magna imperdiet erat, vel porttitor diam justo et felis. Sed arcu odio, pharetra nec aliquet in, ultrices mollis felis. Sed dignissim enim ut faucibus condimentum. Donec quis lacus in ex molestie blandit. Morbi eu est sed justo euismod faucibus. In hac habitasse platea dictumst. Nulla elementum lorem eu mauris dapibus, vitae scelerisque lorem vehicula.",
+    "createdAt": "2025-08-07T10:00:00.000Z",
+    "viewCount": 750
+  }
+]

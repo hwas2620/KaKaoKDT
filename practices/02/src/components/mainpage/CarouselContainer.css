@@ -1,0 +1,54 @@
+/*** carousel-container ***/
+
+.carousel-container {
+    overflow: hidden;
+    padding: 20px;
+}
+
+.carousel-container-wrapper {
+    position: relative;
+    width: 100%;
+    height: 70vh;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    cursor: grab;
+    user-select: none;
+}
+
+.carousel-container-wrapper.grabbing {
+    cursor: grabbing;
+}
+
+/*** 위치 표시자 ***/
+
+.article-card.pos-center {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+    z-index: 10;
+}
+
+.article-card.pos-left {
+    transform: translate(-160%, -50%) scale(0.85);
+    opacity: 0.7;
+    z-index: 5;
+}
+
+.article-card.pos-right {
+    transform: translate(60%, -50%) scale(0.85);
+    opacity: 0.7;
+    z-index: 5;
+}
+
+.article-card.pos-left-extra {
+    transform: translate(-250%, -50%) scale(0.7);
+}
+
+.article-card.pos-right-extra {
+    transform: translate(150%, -50%) scale(0.7);
+}
+
+.article-card.is-out {
+    opacity: 0;
+    z-index: 1;
+}
