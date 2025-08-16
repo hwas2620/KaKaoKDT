@@ -13,10 +13,14 @@ function Main() {
         setArticles(articlesData.map(article => new ArticleInfo(article)));
     }, []);
 
+    const handleCardClick = (articleInfo) => {
+        console.log(articleInfo);
+    };
+
     return (
         <main>
-          <CarouselContainer articles={articles} />
-          <GridContainer articles={articles} />
+          <CarouselContainer articles={articles} onCardClick={handleCardClick} />
+          <GridContainer articles={articles} onCardClick={handleCardClick} />
           <section className="article-container">
                 {articles.map((article, index) =>
                     <Article key={article.id} articleInfo={article} />

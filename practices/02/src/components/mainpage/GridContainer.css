@@ -4,15 +4,16 @@
     padding: 20px;
 }
 
-.grid-container .grid-title {
+.grid-title {
     color: #FFFFFF;
     font-size: 1.6em;
     margin: 20px;
 }
-.grid-container .grid-container-wrapper {
+.grid-container-wrapper {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 5px;
     height: auto;
     cursor: default;
+    list-style: none;
 }

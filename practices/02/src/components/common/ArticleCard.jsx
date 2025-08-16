@@ -7,7 +7,7 @@ function ArticleCard({ as: Component = 'div', variant, articleInfo, index = null
 
     return (
         <Component className={`article-card ${variant}`} style={cardStyle}>
-            <a href={`#article_${articleInfo.id}`} className="article-card-wrapper">
+            <button className="article-card-wrapper" onClick={() => onCardClick(articleInfo)}>
                 <div className="article-img-container">
                     <img src={articleInfo.thumbnail} alt={articleInfo.thumbnailAlt} />
                 </div>
@@ -27,7 +27,7 @@ function ArticleCard({ as: Component = 'div', variant, articleInfo, index = null
                         <span className="department">{articleInfo.author.department}</span>
                     </div>
                 </div>
-            </a>
+            </button>
         </Component>
     );
 }
