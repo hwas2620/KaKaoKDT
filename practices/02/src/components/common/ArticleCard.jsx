@@ -2,9 +2,11 @@ import React from 'react';
 import './ArticleCard.css';
 import InitialsIcon from './InitialsIcon';
 
-function ArticleCard({ as: Component = 'div', variant, pos, articleInfo }) {
+function ArticleCard({ as: Component = 'div', variant, articleInfo, index = null, onCardClick }) {
+    const cardStyle = index !== null ? { '--index': index } : {};
+
     return (
-        <Component className={`article-card ${variant} ${pos}`}>
+        <Component className={`article-card ${variant}`} style={cardStyle}>
             <a href={`#article_${articleInfo.id}`} className="article-card-wrapper">
                 <div className="article-img-container">
                     <img src={articleInfo.thumbnail} alt={articleInfo.thumbnailAlt} />

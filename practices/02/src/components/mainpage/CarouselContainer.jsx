@@ -30,10 +30,9 @@ function CarouselContainer({articles, onCardClick}) {
         });
     });
 
-    const intervalSlide = useInterval(handleSlideLeft, cu.AUTO_SLIDE_TIME_MS);
+    const intervalSlide = useInterval(handleSlideRight, cu.AUTO_SLIDE_TIME_MS);
 
     useEffect(() => {
-        // 3. articles prop에 데이터가 있을 때만 carouselCards state를 업데이트합니다.
         if (articles.length > 0) {
             setCarouselCards(articles.slice(0, cu.CAROUSEL_ITEM_LIMIT));
         }
@@ -46,8 +45,17 @@ function CarouselContainer({articles, onCardClick}) {
     return (
         <section className="carousel-container">
             <ul className="carousel-container-wrapper">
-                {carouselCards.slice(0, cu.VISIBLE_CARD_COUNT + 2).map((article, index) =>
-                    <ArticleCard key={article.id} as="li" variant="large" pos={`${cu.getPositionClass(index)}`} articleInfo={article} />
+                {carouselCards
+                    .slice(0, cu.VISIBLE_CARD_COUNT + 2)
+                    .map((article, index) =>
+                        <ArticleCard
+                          key={article.id}
+                          as="li"
+                          variant="large"
+                          articleInfo={article}
+                          index={index}
+                          onCardClick={onCardClick}
+                        />
                 )}
             </ul>
         </section>
