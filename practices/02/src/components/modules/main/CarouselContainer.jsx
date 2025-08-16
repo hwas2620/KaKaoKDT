@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import './CarouselContainer.css';
-import ArticleCard from '../common/ArticleCard';
+import ArticleCard from '../../ui/ArticleCard';
 import cu from './CarouselUtils';
-import useInterval from '../../hooks/useInterval';
+import useInterval from '../../../hooks/useInterval';
 
 function CarouselContainer({articles, onCardClick}) {
     const [carouselCards, setCarouselCards] = useState([]);

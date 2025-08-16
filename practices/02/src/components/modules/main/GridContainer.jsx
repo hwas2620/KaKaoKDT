@@ -1,5 +1,5 @@
 import './GridContainer.css';
-import ArticleCard from '../common/ArticleCard';
+import ArticleCard from '../../ui/ArticleCard';
 
 function GridContainer({articles, onCardClick}) {
     return (

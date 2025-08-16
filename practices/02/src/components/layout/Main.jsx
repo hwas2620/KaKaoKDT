@@ -1,10 +1,10 @@
 import './Main.css';
 import React, { useEffect, useState } from 'react';
-import Article from './Article';
+import Article from '../ui/Article';
 import ArticleInfo from '../../models/ArticleInfo';
 import articlesData from '../../datas/articles.json';
-import CarouselContainer from '../mainpage/CarouselContainer';
-import GridContainer from '../mainpage/GridContainer';
+import CarouselContainer from '../modules/main/CarouselContainer';
+import GridContainer from '../modules/main/GridContainer';
 
 function Main() {
     const [articles, setArticles] = useState([]);
