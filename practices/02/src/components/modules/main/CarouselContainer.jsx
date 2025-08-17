@@ -19,7 +19,7 @@ function CarouselContainer({articles, onCardClick}) {
 
             return [...rest, first];
         });
-    });
+    }, []);
 
     const handleSlideRight = useCallback(() => {
         setCarouselCards(prevCards => {
@@ -28,7 +28,7 @@ function CarouselContainer({articles, onCardClick}) {
 
             return [last, ...rest];
         });
-    });
+    }, []);
 
     const intervalSlide = useInterval(handleSlideRight, cu.AUTO_SLIDE_TIME_MS);
 
