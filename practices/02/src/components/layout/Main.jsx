@@ -1,6 +1,6 @@
 import './Main.css';
-import React, { useEffect, useState } from 'react';
-import Article from '../ui/Article';
+import React, { useCallback, useEffect, useState } from 'react';
+import ArticleDetailDialog from '../ui/ArticleDetailDialog';
 import ArticleInfo from '../../models/ArticleInfo';
 import articlesData from '../../datas/articles.json';
 import CarouselContainer from '../modules/main/CarouselContainer';
@@ -8,24 +8,31 @@ import GridContainer from '../modules/main/GridContainer';
 
 function Main() {
     const [articles, setArticles] = useState([]);
+    const [selectedArticle, setSelectedArticle] = useState(null);
     
     useEffect(() => {
         setArticles(articlesData.map(article => new ArticleInfo(article)));
     }, []);
 
-    const handleCardClick = (articleInfo) => {
-        console.log(articleInfo);
-    };
+    const handleCardClick = useCallback((articleInfo) => {
+        setSelectedArticle(articleInfo);
+    }, []);
+
+    const handleCloseDialog = useCallback(() => {
+        setSelectedArticle(null);
+    }, []);
+
 
     return (
         <main>
-          <CarouselContainer articles={articles} onCardClick={handleCardClick} />
-          <GridContainer articles={articles} onCardClick={handleCardClick} />
-          <section className="article-container">
-                {articles.map((article, index) =>
-                    <Article key={article.id} articleInfo={article} />
-                )}
-          </section>
+            <CarouselContainer articles={articles} onCardClick={handleCardClick} />
+            <GridContainer articles={articles} onCardClick={handleCardClick} />
+            {selectedArticle && (
+                <ArticleDetailDialog
+                  articleInfo={selectedArticle}
+                  onClose={handleCloseDialog}
+                />
+            )}
       </main>
     );
 }

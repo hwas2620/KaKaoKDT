@@ -33,3 +33,7 @@ body {
     padding-bottom: 70px;
     background-color: #000;
 }
+
+body.dialog-open {
+  overflow: hidden;
+}
