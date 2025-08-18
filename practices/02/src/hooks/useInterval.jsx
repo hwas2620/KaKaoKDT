@@ -1,4 +1,4 @@
-import { useRef, useCallback, useEffect } from 'react';
+import { useRef, useCallback, useEffect, useMemo } from 'react';
 
 const useInterval = (callback, delay) => {
     const callbackRef = useRef(callback);
@@ -16,12 +16,13 @@ const useInterval = (callback, delay) => {
     }, []);
 
     const start = useCallback(() => {
-        if (intervalIdRef.current) return;
+        if (intervalIdRef.current) 
+            stop();
         
         intervalIdRef.current = setInterval(() => {
             callbackRef.current();
         }, delay);
-    }, [delay]);
+    }, [delay, stop]);
 
     const reset = useCallback(() => {
         stop();
@@ -33,7 +34,7 @@ const useInterval = (callback, delay) => {
         return stop;
     }, [stop]);
 
-    return { start, stop, reset };
+    return useMemo(() => ({ start, stop, reset }), [start, stop, reset]);
 };
 
 export default useInterval;
