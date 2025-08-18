@@ -6,10 +6,9 @@ import useInterval from '../../../hooks/useInterval';
 
 function CarouselContainer({articles, onCardClick}) {
     const [carouselCards, setCarouselCards] = useState([]);
-    const [isAnimating, setIsAnimating] = useState(false);
     const [isDragging, setIsDragging] = useState(false);
+    const [moveX, setMoveX] = useState(0);
 
-    const autoSlideIntervalIdRef = useRef(null);
     const dragDirRef = useRef(0);
     const startXRef = useRef(0);
     
@@ -30,7 +29,53 @@ function CarouselContainer({articles, onCardClick}) {
         });
     }, []);
 
-    const intervalSlide = useInterval(handleSlideRight, cu.AUTO_SLIDE_TIME_MS);
+    const intervalSlide = useInterval(handleSlideLeft, cu.AUTO_SLIDE_TIME_MS);
+
+    const handleDragStart = useCallback((event) => {
+        intervalSlide.stop();
+        setIsDragging(true);
+
+        startXRef.current = event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
+        dragDirRef.current = 0;
+
+    }, [intervalSlide]);
+
+    const handleDragMove = useCallback((event) => {
+        if (!isDragging) return;
+
+        const curruntX = event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
+        const dragOffset = curruntX - startXRef.current;
+        const moveX = Math.max(-30, Math.min(30, dragOffset / 5));
+
+        setMoveX(moveX);
+
+        if (Math.abs(dragOffset) > cu.CLICK_THRESHOLD_PX) {
+            dragDirRef.current = dragOffset < 0 ? -1 : 1;
+        } else {
+            dragDirRef.current = 0;
+        }
+    }, [isDragging, startXRef]);
+
+    const handleDragEnd = useCallback((event) => {
+        if (!isDragging) return;
+
+        if (dragDirRef.current < 0) {
+            handleSlideLeft();
+        } else if (dragDirRef.current > 0) {
+            handleSlideRight();
+        }
+
+        setIsDragging(false);
+        setMoveX(0);
+        intervalSlide.reset();
+    }, [isDragging, handleSlideLeft, handleSlideRight, intervalSlide]);
+
+    const handleCardClickWrapper = useCallback((articleInfo) => {
+        console.log(dragDirRef.current);
+        if (dragDirRef.current === 0) {
+            onCardClick(articleInfo);
+        }
+    }, [onCardClick]);
 
     useEffect(() => {
         if (articles.length > 0) {
@@ -44,7 +89,16 @@ function CarouselContainer({articles, onCardClick}) {
 
     return (
         <section className="carousel-container">
-            <ul className="carousel-container-wrapper">
+            <ul
+              className={`carousel-container-wrapper ${isDragging ? 'grabbing' : ''}`}
+              onMouseDown={handleDragStart}
+              onTouchStart={handleDragStart}
+              onMouseMove={handleDragMove}
+              onTouchMove={handleDragMove}
+              onMouseUp={handleDragEnd}
+              onTouchEnd={handleDragEnd}
+              onDragStart={(e) => e.preventDefault()}
+            >
                 {carouselCards
                     .slice(0, cu.VISIBLE_CARD_COUNT + 2)
                     .map((article, index) =>
@@ -54,7 +108,8 @@ function CarouselContainer({articles, onCardClick}) {
                           variant="large"
                           articleInfo={article}
                           index={index}
-                          onCardClick={onCardClick}
+                          moveX={moveX}
+                          onCardClick={handleCardClickWrapper}
                         />
                 )}
             </ul>

@@ -2,8 +2,14 @@ import React from 'react';
 import './ArticleCard.css';
 import InitialsIcon from './InitialsIcon';
 
-function ArticleCard({ as: Component = 'div', variant, articleInfo, index = null, onCardClick }) {
-    const cardStyle = index !== null ? { '--index': index } : {};
+function ArticleCard({ as: Component = 'div', variant, articleInfo, index = null, moveX = 0, onCardClick }) {
+    const cardStyle = Object.assign(
+        index !== null && { '--index': index },
+        moveX !== 0 && {
+            '--moveX': `${moveX}px`,
+            '--scale': `${(1000 - Math.abs(moveX)) / 1000}`
+        });
+        //console.log(moveX);
 
     return (
         <Component className={`article-card ${variant}`} style={cardStyle}>
