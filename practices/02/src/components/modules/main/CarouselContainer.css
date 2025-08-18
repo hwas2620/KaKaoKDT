@@ -20,15 +20,28 @@
     cursor: grabbing;
 }
 
-.article-card {
-    --center-index: 2; 
+.carousel-container-wrapper .article-card {
+    --index: 0;
+    --moveX: 0px;
+    --scale: 1;
+
+    --center-index: 2;
+    --is-center: calc(pow(0, abs(var(--index) - 2)));
     --offset: calc(var(--index) - var(--center-index));
     --abs-offset: max(var(--offset), calc(var(--offset) * -1));
 
     transform:
-      translate(calc(var(--offset) * 100% - 50%), -50%)
-      scale(calc(1 - var(--abs-offset) * 0.15));
+        translate(calc(var(--offset) * 100% - 50% + var(--moveX)), -50%)
+        scale(calc(
+            var(--is-center) * var(--scale) + 
+            (1 - var(--is-center)) * (1 - var(--abs-offset) * 0.15)));
     
     opacity: clamp(0, calc(0.7 - (var(--abs-offset) - 1) * 0.7), 1);
     z-index: calc(10 - var(--abs-offset));
+
+    transition: transform 2s ease-in-out opacity 2s ease-in-out;
+}
+
+.carousel-container-wrapper.grabbing .article-card {
+    transition: transform 0.1s ease-in-out opacity 0.1s ease-in-out;
 }
