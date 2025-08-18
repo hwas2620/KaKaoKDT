@@ -1,0 +1,132 @@
+.dialog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.dialog-content {
+    display: flex;
+    flex-direction: column;
+    
+    width: 90vw;
+    height: 80vh;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #1a1a1a;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    overflow: hidden;
+
+    animation: slideUp 0.7s ease-out forwards;
+}
+
+.dialog-content.closing {
+    animation: slideDown 0.4s ease-out forwards;
+}
+
+.dialog-content header {
+    height: 60px;
+    flex-shrink: 0;
+
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #333;
+    margin-bottom: 20px;
+}
+
+.dialog-content header h2 {
+    margin: 0;
+    color: #fff;
+    font-size: 1.4em;
+    padding: 0 40px;
+}
+
+.dialog-content header .close-bt {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #888;
+    font-size: 28px;
+    font-weight: bold;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.2s ease;
+}
+
+.dialog-content header .close-bt:hover {
+    color: #fff;
+}
+
+.dialog-content main p {
+    position: relative;
+    font-size: 1em;
+    text-align: center;
+    margin-top: 0px;
+    color: #fff;
+}
+
+.dialog-content main {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start; 
+    justify-content: space-between;
+    width: 100%;
+    gap: 20px;
+    overflow-y: auto;
+}
+
+.dialog-content main img,
+.dialog-content main .contents {
+    flex: 1;
+    width: 50%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.dialog-content main img {
+    border: 1px solid #333;
+    object-fit: cover;
+}
+
+.dialog-content main .contents {
+    font-size: 1em;
+    line-height: 1.8;
+    color: #ccc;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+}

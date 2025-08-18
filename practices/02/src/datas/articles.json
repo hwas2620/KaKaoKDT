@@ -2,7 +2,7 @@
   {
     "id": 1,
     "title": "Morbi fringilla in ipsum vitae egestas",
-    "category": "Nam massa nisl",
+    "category": "Nam",
     "thumbnail": "/imgs/jonas-degener-zdWnuuVdTtw-unsplash.jpg",
     "thumbnailAlt": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     "author": {
@@ -41,7 +41,7 @@
   {
     "id": 4,
     "title": "Vivamus quis urna et arcu suscipit condimentum",
-    "category": "congue lectus",
+    "category": "congue",
     "thumbnail": "/imgs/pavlo-talpa-QCuAksDCuC8-unsplash.jpg",
     "thumbnailAlt": "Nisi ut aliquip ex ea commodo consequat.",
     "author": {

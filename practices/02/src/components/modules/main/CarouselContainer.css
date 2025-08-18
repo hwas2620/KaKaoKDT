@@ -1,0 +1,34 @@
+/*** carousel-container ***/
+
+.carousel-container {
+    overflow: hidden;
+    padding: 20px;
+}
+
+.carousel-container-wrapper {
+    position: relative;
+    width: 100%;
+    height: 70vh;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    cursor: grab;
+    user-select: none;
+}
+
+.carousel-container-wrapper.grabbing {
+    cursor: grabbing;
+}
+
+.article-card {
+    --center-index: 2; 
+    --offset: calc(var(--index) - var(--center-index));
+    --abs-offset: max(var(--offset), calc(var(--offset) * -1));
+
+    transform:
+      translate(calc(var(--offset) * 100% - 50%), -50%)
+      scale(calc(1 - var(--abs-offset) * 0.15));
+    
+    opacity: clamp(0, calc(0.7 - (var(--abs-offset) - 1) * 0.7), 1);
+    z-index: calc(10 - var(--abs-offset));
+}

@@ -4,17 +4,16 @@
     padding: 20px;
 }
 
-.grid-container .grid-title {
+.grid-title {
     color: #FFFFFF;
     font-size: 1.6em;
     margin: 20px;
 }
-.grid-container .grid-container-wrapper {
+.grid-container-wrapper {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 5px; /* 카드 사이 간격 */
-
-    /* 캐러셀에 필요했던 속성들을 그리드에 맞게 초기화 */
+    gap: 5px;
     height: auto;
     cursor: default;
+    list-style: none;
 }

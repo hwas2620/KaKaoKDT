@@ -1,8 +1,8 @@
 import './MainPage.css';
-import Header from '../components/common/Header';
-import Main from '../components/common/Main';
-import Nav from '../components/common/Nav';
-import Footer from '../components/common/Footer';
+import Header from '../components/layout/Header';
+import Main from '../components/layout/Main';
+import Nav from '../components/layout/Nav';
+import Footer from '../components/layout/Footer';
 
 function MainPage() {
     return (
