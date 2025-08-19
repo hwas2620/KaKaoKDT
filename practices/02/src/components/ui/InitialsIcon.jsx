@@ -1,3 +1,4 @@
+import React from 'react';
 import './InitialsIcon.css';
 
 function InitialsIcon({ initials}) {
@@ -8,4 +9,4 @@ function InitialsIcon({ initials}) {
     );
 }
 
-export default InitialsIcon;
+export default React.memo(InitialsIcon);

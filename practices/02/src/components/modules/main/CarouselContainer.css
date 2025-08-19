@@ -39,9 +39,9 @@
     opacity: clamp(0, calc(0.7 - (var(--abs-offset) - 1) * 0.7), 1);
     z-index: calc(10 - var(--abs-offset));
 
-    transition: transform 2s ease-in-out opacity 2s ease-in-out;
+    transition: transform 1.5s ease-in-out opacity 1.5s ease-in-out;
 }
 
 .carousel-container-wrapper.grabbing .article-card {
-    transition: transform 0.1s ease-in-out opacity 0.1s ease-in-out;
+    transition: none;
 }
