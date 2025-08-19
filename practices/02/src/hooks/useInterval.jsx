@@ -28,8 +28,7 @@ const useInterval = (callback, delay) => {
         stop();
         start();
     }, [start, stop]);
-
-    // 컴포넌트가 사라질 때 타이머를 자동으로 정리
+    
     useEffect(() => {
         return stop;
     }, [stop]);

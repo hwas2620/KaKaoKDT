@@ -1,19 +1,21 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import './ArticleCard.css';
 import InitialsIcon from './InitialsIcon';
 
 function ArticleCard({ as: Component = 'div', variant, articleInfo, index = null, moveX = 0, onCardClick }) {
-    const cardStyle = Object.assign(
-        index !== null && { '--index': index },
-        moveX !== 0 && {
+    const cardStyle = useMemo(() => ({
+        ...(index !== null && {
+            '--index': index
+        }),
+        ...(moveX !== 0 && {
             '--moveX': `${moveX}px`,
             '--scale': `${(1000 - Math.abs(moveX)) / 1000}`
-        });
-        //console.log(moveX);
+        })
+    }), [index, moveX]);
 
     return (
         <Component className={`article-card ${variant}`} style={cardStyle}>
-            <button className="article-card-wrapper" onClick={() => onCardClick(articleInfo)}>
+            <button className="article-card-wrapper" onClick={() => onCardClick?.(articleInfo)}>
                 <div className="article-img-container">
                     <img src={articleInfo.thumbnail} alt={articleInfo.thumbnailAlt} />
                 </div>
@@ -38,4 +40,4 @@ function ArticleCard({ as: Component = 'div', variant, articleInfo, index = null
     );
 }
 
-export default ArticleCard;
+export default React.memo(ArticleCard);
