@@ -1,11 +1,20 @@
 import React, { useMemo } from 'react';
 import './GridContainer.css';
-import ArticleCard from '../../ui/ArticleCard';
+import { ArticleCard } from '../../ui/ArticleCard';
+import { ArticleInfo } from '../../../models/ArticleInfo';
 
-function GridContainer({articles, onCardClick}) {
+interface GridContainerProps {
+  articles: ArticleInfo[];
+  onCardClick: (articleInfo: ArticleInfo) => void;
+}
+
+export const GridContainer = ({
+    articles,
+    onCardClick
+}: GridContainerProps) => {
     const bestArticles = useMemo(() => {
         return articles
-            .toSorted((a, b) => b.viewCount - a.viewCount)
+            .toSorted((a: any, b: any) => b.viewCount - a.viewCount)
             .slice(0, 4);
     }, [articles]);
 
@@ -13,7 +22,7 @@ function GridContainer({articles, onCardClick}) {
         <section className="grid-container">
             <h1 className="grid-title">Best Content</h1>
             <ul className="grid-container-wrapper">
-                {bestArticles.map((article, index) =>
+                {bestArticles.map((article: any, index: any) =>
                     <ArticleCard
                         key={article.id}
                         as="li"
@@ -26,5 +35,3 @@ function GridContainer({articles, onCardClick}) {
         </section>
     );
 }
-
-export default GridContainer;

@@ -1,7 +1,11 @@
 import React from 'react';
 import './InitialsIcon.css';
 
-function InitialsIcon({ initials}) {
+interface InitialsIconProps {
+    initials: string;
+}
+
+const _InitialsIcon = ({ initials }: InitialsIconProps) => {
     return (
         <span className="initials-icon">
             {initials}
@@ -9,4 +13,4 @@ function InitialsIcon({ initials}) {
     );
 }
 
-export default React.memo(InitialsIcon);
+export const InitialsIcon = React.memo(_InitialsIcon);

@@ -1,8 +1,17 @@
 // import React from 'react';
 import { useState, useEffect } from 'react';
 import './ArticleDetailDialog.css';
+import { ArticleInfo } from '../../models/ArticleInfo';
 
-function ArticleDetailDialog({ onClose, articleInfo }) {
+interface ArticleDetailDialogProps {
+  articleInfo: ArticleInfo;
+  onClose: () => void;
+}
+
+export const ArticleDetailDialog = ({
+    articleInfo,
+    onClose
+}: ArticleDetailDialogProps) => {
     const [isClosing, setIsClosing] = useState(false);
 
     const handleAnimationEnd = () => {
@@ -12,7 +21,6 @@ function ArticleDetailDialog({ onClose, articleInfo }) {
     };
     
     const startClosing = () => {
-        console.log(isClosing)
         setIsClosing(true);
     };
 
@@ -43,5 +51,3 @@ function ArticleDetailDialog({ onClose, articleInfo }) {
         </div>
     );
 }
-
-export default ArticleDetailDialog;

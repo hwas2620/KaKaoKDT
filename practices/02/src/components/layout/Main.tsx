@@ -1,20 +1,20 @@
 import './Main.css';
 import React, { useCallback, useEffect, useState } from 'react';
-import ArticleDetailDialog from '../ui/ArticleDetailDialog';
-import ArticleInfo from '../../models/ArticleInfo';
+import { ArticleDetailDialog } from '../ui/ArticleDetailDialog';
+import { ArticleInfo } from '../../models/ArticleInfo';
 import articlesData from '../../datas/articles.json';
-import CarouselContainer from '../modules/main/CarouselContainer';
-import GridContainer from '../modules/main/GridContainer';
+import { CarouselContainer } from '../modules/main/CarouselContainer';
+import { GridContainer } from '../modules/main/GridContainer';
 
 function Main() {
-    const [articles, setArticles] = useState([]);
-    const [selectedArticle, setSelectedArticle] = useState(null);
+    const [articles, setArticles] = useState<ArticleInfo[]>([]);
+    const [selectedArticle, setSelectedArticle] = useState<ArticleInfo | null>(null);
     
     useEffect(() => {
-        setArticles(articlesData.map(article => new ArticleInfo(article)));
+        setArticles(articlesData.map((article) => new ArticleInfo(article)));
     }, []);
 
-    const handleCardClick = useCallback((articleInfo) => {
+    const handleCardClick = useCallback((articleInfo: ArticleInfo) => {
         setSelectedArticle(articleInfo);
     }, []);
 

@@ -1,32 +1,30 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import './CarouselContainer.css';
-import ArticleCard from '../../ui/ArticleCard';
+import { ArticleCard } from '../../ui/ArticleCard';
 import cu from './CarouselUtils';
-import useInterval from '../../../hooks/useInterval';
-import useSwipe from '../../../hooks/useSwipe';
-import useCarousel from '../../../hooks/useCarousel';
+import { useInterval } from '../../../hooks/useInterval';
+import { useSwipe } from '../../../hooks/useSwipe';
+import { useCarousel } from '../../../hooks/useCarousel';
+import { ArticleInfo } from '../../../models/ArticleInfo';
 
+interface CarouselContainerProps {
+  articles: ArticleInfo[];
+  onCardClick: (articleInfo: ArticleInfo) => void;
+}
 
-
-function CarouselContainer({articles, onCardClick}) {
-    const [carouselCards, isAnimating, handleSlideLeft, handleSlideRight, handleTransitionEnd] = useCarousel(articles);
-    const [swipeHandlers, isDragging, moveX, handleCardClick] = useSwipe({
+export const CarouselContainer = ({
+    articles,
+    onCardClick
+}: CarouselContainerProps) => {
+    const { items: carouselCards, isAnimating, handleSlideLeft, handleSlideRight, handleTransitionEnd } = useCarousel(articles);
+    const { swipeHandlers, isDragging, moveX, handleCardClick } = useSwipe({
         isAnimating,
         onSwipeLeft: handleSlideLeft,
         onSwipeRight: handleSlideRight,
         onClick: onCardClick
     });
-    const intervalSlide = useInterval(handleSlideLeft, cu.AUTO_SLIDE_TIME_MS);
-
-    useEffect(() => {
-        if (!isDragging) {
-            intervalSlide.start();
-        }
-
-        return () => {
-            intervalSlide.stop();
-        };
-    }, [isDragging, intervalSlide]);
+    
+    useInterval(handleSlideLeft, isDragging ? null : cu.AUTO_SLIDE_TIME_MS);
 
     return (
         <section className="carousel-container">
@@ -37,7 +35,7 @@ function CarouselContainer({articles, onCardClick}) {
             >
                 {carouselCards
                     .slice(0, cu.VISIBLE_CARD_COUNT + 2)
-                    .map((article, index) =>
+                    .map((article: any, index: any) =>
                         <ArticleCard
                           key={article.id}
                           as="li"
@@ -52,5 +50,3 @@ function CarouselContainer({articles, onCardClick}) {
         </section>
     );
 }
-
-export default CarouselContainer;
