@@ -1,8 +1,8 @@
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import cu from '../components/modules/main/CarouselUtils';
 
-const useCarousel = (initialItems = []) => {
-    const [items, setItems] = useState([]);
+export const useCarousel = <T,>(initialItems: T[] = []) => {
+    const [items, setItems] = useState<T[]>([]);
     const [isAnimating, setIsAnimating] = useState(false);
 
     useEffect(() => {
@@ -12,20 +12,26 @@ const useCarousel = (initialItems = []) => {
     }, [initialItems]);
 
     const handleSlideLeft = useCallback(() => {
+        setItems(prev => {
+            if (prev.length <= 1) return prev;
+            
+            return [...prev.slice(1), prev[0]];
+        });
         setIsAnimating(true);
-        setItems(prev => [...prev.slice(1), prev[0]]);
     }, []);
 
     const handleSlideRight = useCallback(() => {
+        setItems(prev => {
+            if (prev.length <= 1) return prev;
+
+            return [prev[prev.length - 1], ...prev.slice(0, -1)];
+        });
         setIsAnimating(true);
-        setItems(prev => [prev.at(-1), ...prev.slice(0, -1)]);
     }, []);
 
     const handleTransitionEnd = useCallback(() => {
         setIsAnimating(false);
     }, []);
 
-    return [items, isAnimating, handleSlideLeft, handleSlideRight, handleTransitionEnd];
+    return { items, isAnimating, handleSlideLeft, handleSlideRight, handleTransitionEnd };
 };
-
-export default useCarousel;

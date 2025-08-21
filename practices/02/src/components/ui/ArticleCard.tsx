@@ -1,8 +1,29 @@
-import React, { useMemo } from 'react';
+import React, { ElementType, useMemo } from 'react';
 import './ArticleCard.css';
-import InitialsIcon from './InitialsIcon';
+import { ArticleInfo } from '../../models/ArticleInfo';
+import { InitialsIcon } from './InitialsIcon';
 
-function ArticleCard({ as: Component = 'div', variant, articleInfo, index = null, moveX = 0, onCardClick }) {
+interface InnerArticleCardProps {
+  variant?: 'large' | 'medium' | 'small';
+  articleInfo: ArticleInfo;
+  index?: number | null;
+  moveX?: number;
+  onCardClick?: (articleInfo: ArticleInfo) => void;
+}
+
+type ArticleCardProps<C extends ElementType> = InnerArticleCardProps & {
+  as?: C;
+}
+
+const _ArticleCard = <C extends ElementType = 'div'>({
+    as: Component,
+    variant,
+    articleInfo,
+    index = null,
+    moveX = 0,
+    onCardClick
+}: ArticleCardProps<C>) => {
+    const Tag = Component || 'div';
     const cardStyle = useMemo(() => ({
         ...(index !== null && {
             '--index': index
@@ -14,7 +35,7 @@ function ArticleCard({ as: Component = 'div', variant, articleInfo, index = null
     }), [index, moveX]);
 
     return (
-        <Component className={`article-card ${variant}`} style={cardStyle}>
+        <Tag className={`article-card ${variant}`} style={cardStyle as React.CSSProperties}>
             <button className="article-card-wrapper" onClick={() => onCardClick?.(articleInfo)}>
                 <div className="article-img-container">
                     <img src={articleInfo.thumbnail} alt={articleInfo.thumbnailAlt} />
@@ -36,8 +57,8 @@ function ArticleCard({ as: Component = 'div', variant, articleInfo, index = null
                     </div>
                 </div>
             </button>
-        </Component>
+        </Tag>
     );
 }
 
-export default React.memo(ArticleCard);
+export const ArticleCard = React.memo(_ArticleCard) as typeof _ArticleCard;
